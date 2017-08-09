@@ -1,0 +1,135 @@
+<html>
+
+<head>
+    <title>wfh-calendar</title>
+    <script src="https://use.fontawesome.com/ff519746ef.js"></script>
+    <style>
+        table {
+            border: lightblue;
+            border-collapse: collapse;
+            border-spacing: 2px;
+            border-color: lightblue;
+        }
+        
+        td {
+            color: dimgray;
+            height: 70px;
+            width: 90px;
+            text-align: center;
+        }
+        
+        .date {
+            margin-right: 5px;
+            position: absolute;
+            float: right;
+        }
+        
+        .day-col {
+            background-color: lightcyan;
+        }
+        
+        ul {list-style-type: none;}
+        
+        .nav {
+            padding-top: 10px;
+            padding-bottom: 15px;
+            text-align: center;
+            
+        }
+        
+        .nav ul {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav ul li {
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .nav .prev {
+            padding-left: 10px;
+            float: left;
+        }
+        
+        .nav .next {
+            padding-right: 10px;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calendar">
+        <table border=1>
+            <tr>
+                <td class="nav" colspan=7>
+                    <ul>
+                        <li class="prev">&#10094;</li>
+                        <li class="next">&#10095;</li>
+                        <li>
+                          <span style="font-size:24px">August, 2016</span>
+                        </li>                
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="day-col"><span class="day"><b>SUN</b></span></td>
+                <td class="day-col"><span class="day"><b>MON</b></span></td>
+                <td class="day-col"><span class="day"><b>TUE</b></span></td>
+                <td class="day-col"><span class="day"><b>WED</b></span></td>
+                <td class="day-col"><span class="day"><b>THU</b></span></td>
+                <td class="day-col"><span class="day"><b>FRI</b></span></td>
+                <td class="day-col"><span class="day"><b>SAT</b></span></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">1</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">2</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">3</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">4</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">5</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">6</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">7</span></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">8</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">9</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">10</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">11</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">12</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">13</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">14</span></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">15</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">16</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">17</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">18</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">19</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">20</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">21</span></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">22</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">23</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">24</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">25</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">26</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">27</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">28</span></td>
+            </tr>  
+            <tr>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">29</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">30</span></td>
+                <td><i class="fa fa-star-o fa-3x"></i><span class="date">31</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>              
+        </table>
+    </div>
+</body>
+
+</html>
