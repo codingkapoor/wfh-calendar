@@ -1,3 +1,3 @@
 # wfh-calendar
 
-A WFH calendar plugin in Javascript.
+A calendar plugin in Javascript.
