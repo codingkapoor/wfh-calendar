@@ -1,0 +1,54 @@
+table {
+    border: lightblue;
+    border-collapse: collapse;
+    border-spacing: 2px;
+    border-color: lightblue;
+}
+
+td {
+    color: dimgray;
+    height: 70px;
+    width: 90px;
+    text-align: center;
+}
+
+.date {
+    margin-right: 5px;
+    position: absolute;
+    float: right;
+}
+
+.day-col {
+    background-color: lightcyan;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.nav {
+    padding-top: 10px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul li {
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.nav .prev {
+    padding-left: 10px;
+    float: left;
+}
+
+.nav .next {
+    padding-right: 10px;
+    float: right;
+}
