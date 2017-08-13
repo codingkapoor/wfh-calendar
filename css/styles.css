@@ -56,6 +56,10 @@ ul {
     float: right;
 }
 
+.toggle {
+    margin-top: 10px;
+}
+
 .date {
     margin-right: 5px;
     position: absolute;
