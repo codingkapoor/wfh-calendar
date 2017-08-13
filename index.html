@@ -2,80 +2,93 @@
 
 <head>
     <title>wfh-calendar</title>
-    <script src="./js/jquery-3.2.1.min.js"></script>
+
+    <!-- Fontawesome libraries -->
     <script src="https://use.fontawesome.com/ff519746ef.js"></script>
+
+    <!-- Bootstrap libraries -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="./css/styles.css" />
 </head>
+
 <body>
-    <div id="calendar">
-        <table border=1>
-            <tr>
-                <td class="nav" colspan=7>
-                    <ul>
-                        <li class="prev">&#10094;</li>
-                        <li class="next">&#10095;</li>
-                        <li>
-                          <span style="font-size:24px">August, 2016</span>
-                        </li>                
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td class="day-col"><span class="day"><b>SUN</b></span></td>
-                <td class="day-col"><span class="day"><b>MON</b></span></td>
-                <td class="day-col"><span class="day"><b>TUE</b></span></td>
-                <td class="day-col"><span class="day"><b>WED</b></span></td>
-                <td class="day-col"><span class="day"><b>THU</b></span></td>
-                <td class="day-col"><span class="day"><b>FRI</b></span></td>
-                <td class="day-col"><span class="day"><b>SAT</b></span></td>
-            </tr>
-            <tr>
-                <td><i id="x1" class="fa fa-star-o fa-3x"></i><span class="date">1</span></td>
-                <td><i id="x2" class="fa fa-star-o fa-3x"></i><span class="date">2</span></td>
-                <td><i id="x3" class="fa fa-star-o fa-3x"></i><span class="date">3</span></td>
-                <td><i id="x4" class="fa fa-star-o fa-3x"></i><span class="date">4</span></td>
-                <td><i id="x5" class="fa fa-star-o fa-3x"></i><span class="date">5</span></td>
-                <td><i id="x6" class="fa fa-star-o fa-3x"></i><span class="date">6</span></td>
-                <td><i id="x7" class="fa fa-star-o fa-3x"></i><span class="date">7</span></td>
-            </tr>
-            <tr>
-                <td><i id="x8" class="fa fa-star-o fa-3x"></i><span class="date">8</span></td>
-                <td><i id="x9" class="fa fa-star-o fa-3x"></i><span class="date">9</span></td>
-                <td><i id="x10" class="fa fa-star-o fa-3x"></i><span class="date">10</span></td>
-                <td><i id="x11"  class="fa fa-star-o fa-3x"></i><span class="date">11</span></td>
-                <td><i id="x12"  class="fa fa-star-o fa-3x"></i><span class="date">12</span></td>
-                <td><i id="x13"  class="fa fa-star-o fa-3x"></i><span class="date">13</span></td>
-                <td><i id="x14"  class="fa fa-star-o fa-3x"></i><span class="date">14</span></td>
-            </tr>
-            <tr>
-                <td><i id="x15"  class="fa fa-star-o fa-3x"></i><span class="date">15</span></td>
-                <td><i id="x16"  class="fa fa-star-o fa-3x"></i><span class="date">16</span></td>
-                <td><i id="x17"  class="fa fa-star-o fa-3x"></i><span class="date">17</span></td>
-                <td><i id="x18"  class="fa fa-star-o fa-3x"></i><span class="date">18</span></td>
-                <td><i id="x19"  class="fa fa-star-o fa-3x"></i><span class="date">19</span></td>
-                <td><i id="x20" class="fa fa-star-o fa-3x"></i><span class="date">20</span></td>
-                <td><i id="x21"  class="fa fa-star-o fa-3x"></i><span class="date">21</span></td>
-            </tr>
-            <tr>
-                <td><i id="x22"  class="fa fa-star-o fa-3x"></i><span class="date">22</span></td>
-                <td><i id="x23"  class="fa fa-star-o fa-3x"></i><span class="date">23</span></td>
-                <td><i id="x24"  class="fa fa-star-o fa-3x"></i><span class="date">24</span></td>
-                <td><i id="x25"  class="fa fa-star-o fa-3x"></i><span class="date">25</span></td>
-                <td><i id="x26"  class="fa fa-star-o fa-3x"></i><span class="date">26</span></td>
-                <td><i id="x27"  class="fa fa-star-o fa-3x"></i><span class="date">27</span></td>
-                <td><i id="x28"  class="fa fa-star-o fa-3x"></i><span class="date">28</span></td>
-            </tr>  
-            <tr>
-                <td><i id="x29"  class="fa fa-star-o fa-3x"></i><span class="date">29</span></td>
-                <td><i id="x30"  class="fa fa-star-o fa-3x"></i><span class="date">30</span></td>
-                <td><i id="x31"  class="fa fa-star-o fa-3x"></i><span class="date">31</span></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>              
-        </table>
+    <div id="calendar" class="container">
+        <div class="col-md-12">
+            <div id="nav">
+                <ul>
+                    <li id="prev">&#10094;</li>
+                    <li id="next">&#10095;</li>
+                    <li>
+                        <span style="font-size:24px">August, 2016</span>
+                    </li>
+                </ul>
+            </div>
+            <table border=1>
+                <tr>
+                    <td class="day-col"><span class="day"><b>SUN</b></span></td>
+                    <td class="day-col"><span class="day"><b>MON</b></span></td>
+                    <td class="day-col"><span class="day"><b>TUE</b></span></td>
+                    <td class="day-col"><span class="day"><b>WED</b></span></td>
+                    <td class="day-col"><span class="day"><b>THU</b></span></td>
+                    <td class="day-col"><span class="day"><b>FRI</b></span></td>
+                    <td class="day-col"><span class="day"><b>SAT</b></span></td>
+                </tr>
+                <tr>
+                    <td><i id="x1" class="fa fa-star-o fa-3x"></i><span class="date">1</span></td>
+                    <td><i id="x2" class="fa fa-star-o fa-3x"></i><span class="date">2</span></td>
+                    <td><i id="x3" class="fa fa-star-o fa-3x"></i><span class="date">3</span></td>
+                    <td><i id="x4" class="fa fa-star-o fa-3x"></i><span class="date">4</span></td>
+                    <td><i id="x5" class="fa fa-star-o fa-3x"></i><span class="date">5</span></td>
+                    <td><i id="x6" class="fa fa-star-o fa-3x"></i><span class="date">6</span></td>
+                    <td><i id="x7" class="fa fa-star-o fa-3x"></i><span class="date">7</span></td>
+                </tr>
+                <tr>
+                    <td><i id="x8" class="fa fa-star-o fa-3x"></i><span class="date">8</span></td>
+                    <td><i id="x9" class="fa fa-star-o fa-3x"></i><span class="date">9</span></td>
+                    <td><i id="x10" class="fa fa-star-o fa-3x"></i><span class="date">10</span></td>
+                    <td><i id="x11" class="fa fa-star-o fa-3x"></i><span class="date">11</span></td>
+                    <td><i id="x12" class="fa fa-star-o fa-3x"></i><span class="date">12</span></td>
+                    <td><i id="x13" class="fa fa-star-o fa-3x"></i><span class="date">13</span></td>
+                    <td><i id="x14" class="fa fa-star-o fa-3x"></i><span class="date">14</span></td>
+                </tr>
+                <tr>
+                    <td><i id="x15" class="fa fa-star-o fa-3x"></i><span class="date">15</span></td>
+                    <td><i id="x16" class="fa fa-star-o fa-3x"></i><span class="date">16</span></td>
+                    <td><i id="x17" class="fa fa-star-o fa-3x"></i><span class="date">17</span></td>
+                    <td><i id="x18" class="fa fa-star-o fa-3x"></i><span class="date">18</span></td>
+                    <td><i id="x19" class="fa fa-star-o fa-3x"></i><span class="date">19</span></td>
+                    <td><i id="x20" class="fa fa-star-o fa-3x"></i><span class="date">20</span></td>
+                    <td><i id="x21" class="fa fa-star-o fa-3x"></i><span class="date">21</span></td>
+                </tr>
+                <tr>
+                    <td><i id="x22" class="fa fa-star-o fa-3x"></i><span class="date">22</span></td>
+                    <td><i id="x23" class="fa fa-star-o fa-3x"></i><span class="date">23</span></td>
+                    <td><i id="x24" class="fa fa-star-o fa-3x"></i><span class="date">24</span></td>
+                    <td><i id="x25" class="fa fa-star-o fa-3x"></i><span class="date">25</span></td>
+                    <td><i id="x26" class="fa fa-star-o fa-3x"></i><span class="date">26</span></td>
+                    <td><i id="x27" class="fa fa-star-o fa-3x"></i><span class="date">27</span></td>
+                    <td><i id="x28" class="fa fa-star-o fa-3x"></i><span class="date">28</span></td>
+                </tr>
+                <tr>
+                    <td><i id="x29" class="fa fa-star-o fa-3x"></i><span class="date">29</span></td>
+                    <td><i id="x30" class="fa fa-star-o fa-3x"></i><span class="date">30</span></td>
+                    <td><i id="x31" class="fa fa-star-o fa-3x"></i><span class="date">31</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <br/>
+            <button type="button" class="btn btn-outline-info col-7">Submit Request</button>
+        </div>
     </div>
+
+
     <script src="./js/main.js"></script>
 </body>
 

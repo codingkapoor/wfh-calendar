@@ -1,3 +1,5 @@
+html, body { margin: 0; padding: 0; }
+
 table {
     border: lightblue;
     border-collapse: collapse;
@@ -12,6 +14,48 @@ td {
     text-align: center;
 }
 
+ul {
+    list-style-type: none;
+}
+
+#calendar { 
+    margin-top: 50px;
+    margin-right: auto; 
+}
+
+#nav {
+    width: 631px;
+    border: 1;
+    border-style: solid;
+    border-width: thin;
+    border-color: lightblue;
+    border-bottom: 0;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+#nav ul li {
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+#nav #prev {
+    padding-left: 10px;
+    float: left;
+}
+
+#nav #next {
+    padding-right: 10px;
+    float: right;
+}
+
 .date {
     margin-right: 5px;
     position: absolute;
@@ -22,33 +66,14 @@ td {
     background-color: lightcyan;
 }
 
-ul {
-    list-style-type: none;
+.btn-outline-info {
+    color: dimgray;
+    font-weight: bold;
+    border-color: lightblue;
 }
 
-.nav {
-    padding-top: 10px;
-    padding-bottom: 15px;
-    text-align: center;
-}
-
-.nav ul {
-    margin: 0;
-    padding: 0;
-}
-
-.nav ul li {
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-.nav .prev {
-    padding-left: 10px;
-    float: left;
-}
-
-.nav .next {
-    padding-right: 10px;
-    float: right;
+.btn-outline-info:hover {
+    color: dimgray;
+    border-color: lightblue;
+    background-color: lightcyan;
 }
