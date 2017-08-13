@@ -28,19 +28,47 @@ $(document).ready(function () {
     /* TODO: Currently, the following callback responds to an event on any icon. It should instead responds to only wfh-icons. */
 
     $('i').on('click', function (e) {
-        
-        function updateMonthlyWorkStatus(selection, status) {
-            MONTHLY_WORK_STATUS[parseInt($(selection).attr('id').substring(1)) - 1] = status;
-            console.log(MONTHLY_WORK_STATUS);
+
+        function isSelectionValid(selection, status) {
+            var indexOfCurrentSelection = parseInt($(selection).attr('id').substring(1)) - 1
+
+            var indicesOfAllSelections = _.map(MONTHLY_WORK_STATUS, function (num, index) {
+                if (num != 0)
+                    return index;
+                else return 0;
+            });
+
+            var filteredIndices = _.filter(indicesOfAllSelections, function (num) {
+                return num > 0;
+            });
+
+            if (filteredIndices.length > 0) {
+                if (Math.abs(filteredIndices[0] - indexOfCurrentSelection) != 1 &&
+                    Math.abs(filteredIndices[filteredIndices.length - 1] - indexOfCurrentSelection) != 1) {
+                    alert("Not allowed");               // TODO: replace with Bootstrap alert
+                    console.log(MONTHLY_WORK_STATUS);
+                    return false;
+                } else {
+                    MONTHLY_WORK_STATUS[indexOfCurrentSelection] = status;
+                    console.log(MONTHLY_WORK_STATUS);
+                    return true;
+                }
+            } else {
+                MONTHLY_WORK_STATUS[indexOfCurrentSelection] = status;
+                console.log(MONTHLY_WORK_STATUS);
+                return true;
+            }
         }
 
         if (toggleStatus) {
             if ($(this).hasClass('fa-star')) {
-                $(this).toggleClass('fa-star fa-star-o');
-                updateMonthlyWorkStatus(this, WORK_STATUS.NOT_WFH);
+                if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
+                    $(this).toggleClass('fa-star fa-star-o');
+                }
             } else {
-                $(this).removeClass('fa-star-o fa-star-half-o fa-flip-horizontal').addClass('fa-star');
-                updateMonthlyWorkStatus(this, WORK_STATUS.FULL_DAY_WFH);
+                if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
+                    $(this).removeClass('fa-star-o fa-star-half-o fa-flip-horizontal').addClass('fa-star');
+                }
             }
         } else {
             var iWidth = $(this).outerWidth();
@@ -49,31 +77,39 @@ $(document).ready(function () {
             var x = e.pageX - iOffset.left;
             if (iWidth / 2 > x) {
                 if ($(this).hasClass('fa-star-o')) {
-                    $(this).toggleClass('fa-star-o fa-star-half-o');
-                    updateMonthlyWorkStatus(this, WORK_STATUS.FIRST_HALF_WFH);
+                    if (isSelectionValid(this, WORK_STATUS.FIRST_HALF_WFH)) {
+                        $(this).toggleClass('fa-star-o fa-star-half-o');
+                    }
                 } else if ($(this).hasClass('fa-star-half-o fa-flip-horizontal')) {
-                    $(this).toggleClass('fa-star-half-o fa-flip-horizontal fa-star');
-                    updateMonthlyWorkStatus(this, WORK_STATUS.FULL_DAY_WFH);
+                    if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
+                        $(this).toggleClass('fa-star-half-o fa-flip-horizontal fa-star');
+                    }
                 } else if ($(this).hasClass('fa-star-half-o')) {
-                    $(this).toggleClass('fa-star-half-o fa-star-o');
-                    updateMonthlyWorkStatus(this, WORK_STATUS.NOT_WFH);
+                    if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
+                        $(this).toggleClass('fa-star-half-o fa-star-o');
+                    }
                 } else if ($(this).hasClass('fa-star')) {
-                    $(this).toggleClass('fa-star fa-star-half-o fa-flip-horizontal');
-                    updateMonthlyWorkStatus(this, WORK_STATUS.SECOND_HALF_WFH);
+                    if (isSelectionValid(this, WORK_STATUS.SECOND_HALF_WFH)) {
+                        $(this).toggleClass('fa-star fa-star-half-o fa-flip-horizontal');
+                    }
                 }
             } else {
                 if ($(this).hasClass('fa-star-o')) {
-                    $(this).toggleClass('fa-star-o fa-star-half-o fa-flip-horizontal');
-                    updateMonthlyWorkStatus(this, WORK_STATUS.SECOND_HALF_WFH);
+                    if (isSelectionValid(this, WORK_STATUS.SECOND_HALF_WFH)) {
+                        $(this).toggleClass('fa-star-o fa-star-half-o fa-flip-horizontal');
+                    }
                 } else if ($(this).hasClass('fa-star-half-o fa-flip-horizontal')) {
-                    $(this).toggleClass('fa-star-half-o fa-flip-horizontal fa-star-o');
-                    updateMonthlyWorkStatus(this, WORK_STATUS.NOT_WFH);
+                    if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
+                        $(this).toggleClass('fa-star-half-o fa-flip-horizontal fa-star-o');
+                    }
                 } else if ($(this).hasClass('fa-star-half-o')) {
-                    $(this).toggleClass('fa-star-half-o fa-star');
-                    updateMonthlyWorkStatus(this, WORK_STATUS.FULL_DAY_WFH);
+                    if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
+                        $(this).toggleClass('fa-star-half-o fa-star');
+                    }
                 } else if ($(this).hasClass('fa-star')) {
-                    $(this).toggleClass('fa-star fa-star-half-o');
-                    updateMonthlyWorkStatus(this, WORK_STATUS.FIRST_HALF_WFH);
+                    if (isSelectionValid(this, WORK_STATUS.FIRST_HALF_WFH)) {
+                        $(this).toggleClass('fa-star fa-star-half-o');
+                    }
                 }
             }
         }
