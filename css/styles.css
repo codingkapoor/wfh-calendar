@@ -1,10 +1,9 @@
 html, body { margin: 0; padding: 0; }
 
 table {
-    border: lightblue;
+    border: #ededed;
     border-collapse: collapse;
     border-spacing: 2px;
-    border-color: lightblue;
 }
 
 td {
@@ -28,7 +27,7 @@ ul {
     border: 1;
     border-style: solid;
     border-width: thin;
-    border-color: lightblue;
+    border-color: #ededed;
     border-bottom: 0;
     text-align: center;
     padding-top: 20px;
@@ -65,8 +64,3 @@ ul {
     position: absolute;
     float: right;
 }
-
-.day-col {
-    background-color: lightcyan;
-}
-
