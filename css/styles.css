@@ -70,14 +70,3 @@ ul {
     background-color: lightcyan;
 }
 
-.btn-outline-info {
-    color: dimgray;
-    font-weight: bold;
-    border-color: lightblue;
-}
-
-.btn-outline-info:hover {
-    color: dimgray;
-    border-color: lightblue;
-    background-color: lightcyan;
-}
