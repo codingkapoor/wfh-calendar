@@ -58,6 +58,8 @@ ul {
 
 #submit {
     font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 
 .toggle {
