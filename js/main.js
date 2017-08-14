@@ -30,77 +30,64 @@ $(document).ready(function () {
     $('i').on('click', function (e) {
 
         function dateSeqValidation(indexOfCurrentSelection) {
-            var indicesOfAllSelections = _.map(MONTHLY_WORK_STATUS, function (num, index) {
-                if (num != 0)
-                    return index;
-                else return 0;
-            });
+            var indicesOfAllSelections = _.filter(
+                _.map(MONTHLY_WORK_STATUS, function (num, index) {
+                    if (num != 0)
+                        return index;
+                    else return 0;
+                }),
+                function (num) {
+                    return num > 0;
+                });
 
-            var filteredIndices = _.filter(indicesOfAllSelections, function (num) {
-                return num > 0;
-            });
-
-            if (filteredIndices.length > 0) {
-                if (Math.abs(filteredIndices[0] - indexOfCurrentSelection) > 1 &&
-                    Math.abs(filteredIndices[filteredIndices.length - 1] - indexOfCurrentSelection) > 1) {
+            if (indicesOfAllSelections.length > 0) {
+                if (Math.abs(indicesOfAllSelections[0] - indexOfCurrentSelection) > 1 &&
+                    Math.abs(indicesOfAllSelections[indicesOfAllSelections.length - 1] - indexOfCurrentSelection) > 1) {
                     return false;
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
-            }
+                } else return true;
+            } else return true;
         }
 
-        function illegalSelectionValidation(indexOfCurrentSelection, status) {
+        function illegalSelectionValidation(indexOfCurrentSelection, intendedWorkStatus) {
             var prev = indexOfCurrentSelection - 1;
             var next = indexOfCurrentSelection + 1;
 
-            if (status == WORK_STATUS.FIRST_HALF_WFH) {
-                if ((prev >= 0 && MONTHLY_WORK_STATUS[prev] == WORK_STATUS.FIRST_HALF_WFH) ||
-                    (next < MONTHLY_WORK_STATUS.length && (MONTHLY_WORK_STATUS[next] == WORK_STATUS.FIRST_HALF_WFH ||
-                        MONTHLY_WORK_STATUS[next] == WORK_STATUS.SECOND_HALF_WFH ||
-                        MONTHLY_WORK_STATUS[next] == WORK_STATUS.FULL_DAY_WFH))) {
-                    return false;
-                } else {
+            switch (intendedWorkStatus) {
+                case WORK_STATUS.FIRST_HALF_WFH:
+                    if ((prev >= 0 && MONTHLY_WORK_STATUS[prev] == WORK_STATUS.FIRST_HALF_WFH) ||
+                        (next < MONTHLY_WORK_STATUS.length && (MONTHLY_WORK_STATUS[next] == WORK_STATUS.FIRST_HALF_WFH ||
+                            MONTHLY_WORK_STATUS[next] == WORK_STATUS.SECOND_HALF_WFH ||
+                            MONTHLY_WORK_STATUS[next] == WORK_STATUS.FULL_DAY_WFH))) {
+                        return false;
+                    } else return true;
+                case WORK_STATUS.SECOND_HALF_WFH:
+                    if ((prev >= 0 && (MONTHLY_WORK_STATUS[prev] == WORK_STATUS.FIRST_HALF_WFH ||
+                            MONTHLY_WORK_STATUS[prev] == WORK_STATUS.FULL_DAY_WFH ||
+                            MONTHLY_WORK_STATUS[prev] == WORK_STATUS.SECOND_HALF_WFH)) ||
+                        (next < MONTHLY_WORK_STATUS.length && MONTHLY_WORK_STATUS[next] == WORK_STATUS.SECOND_HALF_WFH)) {
+                        return false;
+                    } else return true;
+                case WORK_STATUS.FULL_DAY_WFH:
+                    if ((prev >= 0 && MONTHLY_WORK_STATUS[prev] == WORK_STATUS.FIRST_HALF_WFH) ||
+                        (next < MONTHLY_WORK_STATUS.length && MONTHLY_WORK_STATUS[next] == WORK_STATUS.SECOND_HALF_WFH)) {
+                        return false;
+                    } else return true;
+                default:
                     return true;
-                }
-            } else if (status == WORK_STATUS.SECOND_HALF_WFH) {
-                if ((prev >= 0 && (MONTHLY_WORK_STATUS[prev] == WORK_STATUS.FIRST_HALF_WFH ||
-                        MONTHLY_WORK_STATUS[prev] == WORK_STATUS.FULL_DAY_WFH ||
-                        MONTHLY_WORK_STATUS[prev] == WORK_STATUS.SECOND_HALF_WFH)) ||
-                    (next < MONTHLY_WORK_STATUS.length && MONTHLY_WORK_STATUS[next] == WORK_STATUS.SECOND_HALF_WFH)) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } else if (status == WORK_STATUS.FULL_DAY_WFH) {
-                if ((prev >= 0 && MONTHLY_WORK_STATUS[prev] == WORK_STATUS.FIRST_HALF_WFH) ||
-                    (next < MONTHLY_WORK_STATUS.length && MONTHLY_WORK_STATUS[next] == WORK_STATUS.SECOND_HALF_WFH)) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
             }
         }
 
-        function isSelectionValid(selection, status) {
+        function isSelectionValid(selection, intendedWorkStatus) {
             var indexOfCurrentSelection = parseInt($(selection).attr('id').substring(1)) - 1;
 
-            var f1 = dateSeqValidation(indexOfCurrentSelection);
-            var f2 = illegalSelectionValidation(indexOfCurrentSelection, status);
-
-            if (f1 && f2) {
-                MONTHLY_WORK_STATUS[indexOfCurrentSelection] = status;
-                console.log(MONTHLY_WORK_STATUS);
+            var f = dateSeqValidation(indexOfCurrentSelection) && illegalSelectionValidation(indexOfCurrentSelection, intendedWorkStatus);
+            if (f) {
+                MONTHLY_WORK_STATUS[indexOfCurrentSelection] = intendedWorkStatus;
             } else {
-                console.log(MONTHLY_WORK_STATUS);
                 alert("Not allowed"); // TODO: replace with Bootstrap alert
             }
 
-            return f1 && f2;
+            return f;
         }
 
         if (toggleStatus) {
