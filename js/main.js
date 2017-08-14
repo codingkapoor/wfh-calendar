@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
     'use strict';
-
+    
     var WORK_STATUS = {
         NOT_WFH: 0,
         FIRST_HALF_WFH: 1,
@@ -84,7 +84,10 @@ $(document).ready(function () {
             if (f) {
                 MONTHLY_WORK_STATUS[indexOfCurrentSelection] = intendedWorkStatus;
             } else {
-                alert("Not allowed"); // TODO: replace with Bootstrap alert
+                $(".alert").toggleClass('fade show');
+                window.setTimeout(function () {
+                    $(".alert").toggleClass('show fade');
+                }, 3000);
             }
 
             return f;
