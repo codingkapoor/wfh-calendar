@@ -16,18 +16,16 @@ $(document).ready(function () {
 
     /* Initialize Calendar with latest WFH request statuses */
     (function () {
-        var initialMonthlyWorkStatus = new Array(31);
-        initialMonthlyWorkStatus.fill(WORK_STATUS.NOT_WFH);
-        initialMonthlyWorkStatus[1] = WORK_STATUS.SECOND_HALF_WFH;
-        initialMonthlyWorkStatus[2] = WORK_STATUS.FULL_DAY_WFH;
-        initialMonthlyWorkStatus[3] = WORK_STATUS.FULL_DAY_WFH;
-        initialMonthlyWorkStatus[4] = WORK_STATUS.FIRST_HALF_WFH;
+        monthlyWorkStatus[1] = WORK_STATUS.SECOND_HALF_WFH;
+        monthlyWorkStatus[2] = WORK_STATUS.FULL_DAY_WFH;
+        monthlyWorkStatus[3] = WORK_STATUS.FULL_DAY_WFH;
+        monthlyWorkStatus[4] = WORK_STATUS.FIRST_HALF_WFH;
 
         var i;
-        for (i = 0; i < initialMonthlyWorkStatus.length; i++) {
+        for (i = 0; i < monthlyWorkStatus.length; i++) {
             var id = "#x" + (i + 1);
 
-            switch (initialMonthlyWorkStatus[i]) {
+            switch (monthlyWorkStatus[i]) {
                 case WORK_STATUS.NOT_WFH:
                     break;
                 case WORK_STATUS.FIRST_HALF_WFH:
@@ -56,9 +54,6 @@ $(document).ready(function () {
         }
     })
 
-
-    /* TODO: Currently, the following callback responds to an event on any icon. It should instead responds to only wfh-icons. */
-
     $('i').on('click', function (e) {
 
         function dateSeqValidation(indexOfCurrentSelection) {
@@ -86,22 +81,28 @@ $(document).ready(function () {
 
             switch (intendedWorkStatus) {
                 case WORK_STATUS.FIRST_HALF_WFH:
-                    if ((prev >= 0 && monthlyWorkStatus[prev] == WORK_STATUS.FIRST_HALF_WFH) ||
-                        (next < monthlyWorkStatus.length && (monthlyWorkStatus[next] == WORK_STATUS.FIRST_HALF_WFH ||
-                            monthlyWorkStatus[next] == WORK_STATUS.SECOND_HALF_WFH ||
-                            monthlyWorkStatus[next] == WORK_STATUS.FULL_DAY_WFH))) {
+                    if ((prev >= 0 &&
+                            monthlyWorkStatus[prev] == WORK_STATUS.FIRST_HALF_WFH) ||
+                        (next < monthlyWorkStatus.length &&
+                            (monthlyWorkStatus[next] == WORK_STATUS.FIRST_HALF_WFH ||
+                                monthlyWorkStatus[next] == WORK_STATUS.SECOND_HALF_WFH ||
+                                monthlyWorkStatus[next] == WORK_STATUS.FULL_DAY_WFH))) {
                         return false;
                     } else return true;
                 case WORK_STATUS.SECOND_HALF_WFH:
-                    if ((prev >= 0 && (monthlyWorkStatus[prev] == WORK_STATUS.FIRST_HALF_WFH ||
-                            monthlyWorkStatus[prev] == WORK_STATUS.FULL_DAY_WFH ||
-                            monthlyWorkStatus[prev] == WORK_STATUS.SECOND_HALF_WFH)) ||
-                        (next < monthlyWorkStatus.length && monthlyWorkStatus[next] == WORK_STATUS.SECOND_HALF_WFH)) {
+                    if ((prev >= 0 &&
+                            (monthlyWorkStatus[prev] == WORK_STATUS.FIRST_HALF_WFH ||
+                                monthlyWorkStatus[prev] == WORK_STATUS.FULL_DAY_WFH ||
+                                monthlyWorkStatus[prev] == WORK_STATUS.SECOND_HALF_WFH)) ||
+                        (next < monthlyWorkStatus.length &&
+                            monthlyWorkStatus[next] == WORK_STATUS.SECOND_HALF_WFH)) {
                         return false;
                     } else return true;
                 case WORK_STATUS.FULL_DAY_WFH:
-                    if ((prev >= 0 && monthlyWorkStatus[prev] == WORK_STATUS.FIRST_HALF_WFH) ||
-                        (next < monthlyWorkStatus.length && monthlyWorkStatus[next] == WORK_STATUS.SECOND_HALF_WFH)) {
+                    if ((prev >= 0 &&
+                            monthlyWorkStatus[prev] == WORK_STATUS.FIRST_HALF_WFH) ||
+                        (next < monthlyWorkStatus.length &&
+                            monthlyWorkStatus[next] == WORK_STATUS.SECOND_HALF_WFH)) {
                         return false;
                     } else return true;
                 default:
@@ -125,59 +126,65 @@ $(document).ready(function () {
             return f;
         }
 
-        if (toggleStatus) {
-            if ($(this).hasClass('fa-star')) {
-                if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
-                    $(this).toggleClass('fa-star fa-star-o');
+        
+        var re = new RegExp(/x\d+/);
+        
+        if (re.test($(this).attr('id'))) {
+            if (toggleStatus) {
+                if ($(this).hasClass('fa-star')) {
+                    if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
+                        $(this).toggleClass('fa-star fa-star-o');
+                    }
+                } else {
+                    if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
+                        $(this).removeClass('fa-star-o fa-star-half-o fa-flip-horizontal').addClass('fa-star');
+                    }
                 }
             } else {
-                if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
-                    $(this).removeClass('fa-star-o fa-star-half-o fa-flip-horizontal').addClass('fa-star');
-                }
-            }
-        } else {
-            var iWidth = $(this).outerWidth();
-            var iOffset = $(this).offset();
+                var iWidth = $(this).outerWidth();
+                var iOffset = $(this).offset();
 
-            var x = e.pageX - iOffset.left;
-            if (iWidth / 2 > x) {
-                if ($(this).hasClass('fa-star-o')) {
-                    if (isSelectionValid(this, WORK_STATUS.FIRST_HALF_WFH)) {
-                        $(this).toggleClass('fa-star-o fa-star-half-o');
+                var x = e.pageX - iOffset.left;
+                if (iWidth / 2 > x) {
+                    if ($(this).hasClass('fa-star-o')) {
+                        if (isSelectionValid(this, WORK_STATUS.FIRST_HALF_WFH)) {
+                            $(this).toggleClass('fa-star-o fa-star-half-o');
+                        }
+                    } else if ($(this).hasClass('fa-star-half-o fa-flip-horizontal')) {
+                        if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
+                            $(this).toggleClass('fa-star-half-o fa-flip-horizontal fa-star');
+                        }
+                    } else if ($(this).hasClass('fa-star-half-o')) {
+                        if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
+                            $(this).toggleClass('fa-star-half-o fa-star-o');
+                        }
+                    } else if ($(this).hasClass('fa-star')) {
+                        if (isSelectionValid(this, WORK_STATUS.SECOND_HALF_WFH)) {
+                            $(this).toggleClass('fa-star fa-star-half-o fa-flip-horizontal');
+                        }
                     }
-                } else if ($(this).hasClass('fa-star-half-o fa-flip-horizontal')) {
-                    if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
-                        $(this).toggleClass('fa-star-half-o fa-flip-horizontal fa-star');
-                    }
-                } else if ($(this).hasClass('fa-star-half-o')) {
-                    if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
-                        $(this).toggleClass('fa-star-half-o fa-star-o');
-                    }
-                } else if ($(this).hasClass('fa-star')) {
-                    if (isSelectionValid(this, WORK_STATUS.SECOND_HALF_WFH)) {
-                        $(this).toggleClass('fa-star fa-star-half-o fa-flip-horizontal');
-                    }
-                }
-            } else {
-                if ($(this).hasClass('fa-star-o')) {
-                    if (isSelectionValid(this, WORK_STATUS.SECOND_HALF_WFH)) {
-                        $(this).toggleClass('fa-star-o fa-star-half-o fa-flip-horizontal');
-                    }
-                } else if ($(this).hasClass('fa-star-half-o fa-flip-horizontal')) {
-                    if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
-                        $(this).toggleClass('fa-star-half-o fa-flip-horizontal fa-star-o');
-                    }
-                } else if ($(this).hasClass('fa-star-half-o')) {
-                    if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
-                        $(this).toggleClass('fa-star-half-o fa-star');
-                    }
-                } else if ($(this).hasClass('fa-star')) {
-                    if (isSelectionValid(this, WORK_STATUS.FIRST_HALF_WFH)) {
-                        $(this).toggleClass('fa-star fa-star-half-o');
+                } else {
+                    if ($(this).hasClass('fa-star-o')) {
+                        if (isSelectionValid(this, WORK_STATUS.SECOND_HALF_WFH)) {
+                            $(this).toggleClass('fa-star-o fa-star-half-o fa-flip-horizontal');
+                        }
+                    } else if ($(this).hasClass('fa-star-half-o fa-flip-horizontal')) {
+                        if (isSelectionValid(this, WORK_STATUS.NOT_WFH)) {
+                            $(this).toggleClass('fa-star-half-o fa-flip-horizontal fa-star-o');
+                        }
+                    } else if ($(this).hasClass('fa-star-half-o')) {
+                        if (isSelectionValid(this, WORK_STATUS.FULL_DAY_WFH)) {
+                            $(this).toggleClass('fa-star-half-o fa-star');
+                        }
+                    } else if ($(this).hasClass('fa-star')) {
+                        if (isSelectionValid(this, WORK_STATUS.FIRST_HALF_WFH)) {
+                            $(this).toggleClass('fa-star fa-star-half-o');
+                        }
                     }
                 }
             }
         }
+
     });
 
 });
