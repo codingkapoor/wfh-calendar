@@ -12,37 +12,43 @@ $(document).ready(function () {
     };
 
     var monthlyWorkStatus = new Array(31);
-    monthlyWorkStatus.fill(WORK_STATUS.NOT_WFH);
 
-    /* Initialize Calendar with latest WFH request statuses */
-    (function () {
-        monthlyWorkStatus[1] = WORK_STATUS.SECOND_HALF_WFH;
-        monthlyWorkStatus[2] = WORK_STATUS.FULL_DAY_WFH;
-        monthlyWorkStatus[3] = WORK_STATUS.FULL_DAY_WFH;
-        monthlyWorkStatus[4] = WORK_STATUS.FIRST_HALF_WFH;
+    function init() {
+        monthlyWorkStatus.fill(WORK_STATUS.NOT_WFH);
 
-        var i;
-        for (i = 0; i < monthlyWorkStatus.length; i++) {
-            var id = "#x" + (i + 1);
+        (function () {
+            monthlyWorkStatus[1] = WORK_STATUS.SECOND_HALF_WFH;
+            monthlyWorkStatus[2] = WORK_STATUS.FULL_DAY_WFH;
+            monthlyWorkStatus[3] = WORK_STATUS.FULL_DAY_WFH;
+            monthlyWorkStatus[4] = WORK_STATUS.FIRST_HALF_WFH;
 
-            switch (monthlyWorkStatus[i]) {
-                case WORK_STATUS.NOT_WFH:
-                    break;
-                case WORK_STATUS.FIRST_HALF_WFH:
-                    $(id).toggleClass('fa-star-o fa-star-half-o');
-                    break;
-                case WORK_STATUS.SECOND_HALF_WFH:
-                    $(id).toggleClass('fa-star-o fa-star-half-o fa-flip-horizontal');
-                    break;
-                case WORK_STATUS.FULL_DAY_WFH:
-                    $(id).toggleClass('fa-star-o fa-star');
-                    console.log($(id).attr('class'));
-                    break;
-                default:
-                    break;
+            var i;
+            for (i = 0; i < monthlyWorkStatus.length; i++) {
+                var id = "#x" + (i + 1);
+
+                switch (monthlyWorkStatus[i]) {
+                    case WORK_STATUS.NOT_WFH:
+                        break;
+                    case WORK_STATUS.FIRST_HALF_WFH:
+                        $(id).toggleClass('fa-star-o fa-star-half-o');
+                        break;
+                    case WORK_STATUS.SECOND_HALF_WFH:
+                        $(id).toggleClass('fa-star-o fa-star-half-o fa-flip-horizontal');
+                        break;
+                    case WORK_STATUS.FULL_DAY_WFH:
+                        $(id).toggleClass('fa-star-o fa-star');
+                        console.log($(id).attr('class'));
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-    })();
+        })();
+
+    }
+
+    /* Initialize Calendar */
+    init();
 
     var toggleStatus = true;
 
@@ -52,9 +58,9 @@ $(document).ready(function () {
         } else {
             toggleStatus = false;
         }
-    })
+    });
 
-    $('i').on('click', function (e) {
+    $(document).on('click', 'i', function (e) {
 
         function dateSeqValidation(indexOfCurrentSelection) {
             var indicesOfAllSelections = _.filter(
@@ -126,9 +132,9 @@ $(document).ready(function () {
             return f;
         }
 
-        
+
         var re = new RegExp(/x\d+/);
-        
+
         if (re.test($(this).attr('id'))) {
             if (toggleStatus) {
                 if ($(this).hasClass('fa-star')) {
@@ -185,6 +191,14 @@ $(document).ready(function () {
             }
         }
 
+    });
+
+    $(document).on('click', '#prev', function (e) {
+        init();
+    });
+
+    $(document).on('click', '#next', function (e) {
+        init();
     });
 
 });
