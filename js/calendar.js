@@ -59,7 +59,7 @@ function buildCalendar(month, year) {
         calendarBody += `</tr>`;
     }
 
-    $('#calendarBody').html(calendarBody);
+    $('#calendarBody').find('table').html(calendarBody);
 }
 
 function split(arr, n) {
