@@ -62,14 +62,6 @@ function buildCalendar(month, year) {
     $('#calendarBody').find('table').html(calendarBody);
 }
 
-function split(arr, n) {
-    var res = [];
-    while (arr.length) {
-        res.push(arr.splice(0, n));
-    }
-    return res;
-}
-
 function next() {
     var currentMonthYear = new Date($('#my').text());
     var month = currentMonthYear.getMonth() + 1;
