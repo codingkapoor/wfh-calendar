@@ -1,15 +1,11 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    
-    <title>wfh-calendar</title>
 
-    <!-- Fontawesome libraries -->
-    <script src="https://use.fontawesome.com/ff519746ef.js"></script>
+    <title>wfh-calendar</title>
 
     <!-- Bootstrap libraries -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -18,9 +14,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
-    <!-- Underscore library -->
-    <script src="./assets/scripts/libs/underscore-min.js"></script>
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
@@ -35,8 +28,8 @@
                 <div id="calendar">
                     <div id="calendarHeader">
                         <ul>
-                            <li id="prev" onclick="prev()">&#10094;</li>
-                            <li id="next" onclick="next()">&#10095;</li>
+                            <li id="prev">&#10094;</li>
+                            <li id="next">&#10095;</li>
                             <li>
                                 <span id="my" style="font-size:24px"></span>
                             </li>
@@ -60,9 +53,14 @@
         <strong>Warning:</strong> Only consecutive dates are allowed.
     </div>
 
-    <script src="./assets/scripts/utils/helper.js"></script>
-    <script src="./assets/scripts/views/calendar.js"></script>
-    <script src="./assets/scripts/utils/validate.js"></script>
+    <script data-main="assets/scripts/config" src="assets/scripts/require.js"></script>
+    <script>
+        require(['config'], function() {
+            require(['fontawesome']);
+            require(['views/calendar', 'utils/validate']);
+        });
+
+    </script>
 </body>
 
 </html>
