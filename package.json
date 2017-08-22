@@ -1,0 +1,31 @@
+{
+  "name": "wfh-calendar",
+  "version": "1.0.0",
+  "description": "A javascript calendar plugin.",
+  "main": "gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codingkapoor/wfh-calendar.git"
+  },
+  "author": "codingkapoor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codingkapoor/wfh-calendar/issues"
+  },
+  "homepage": "https://github.com/codingkapoor/wfh-calendar#readme",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^2.2.1",
+    "grunt-contrib-htmlmin": "^2.4.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "time-grunt": "^1.4.0"
+  }
+}
