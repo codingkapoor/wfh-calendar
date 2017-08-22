@@ -32,13 +32,13 @@ define(['underscore', 'helper'], function (_, helper) {
     function buildCalendar(month, year) {
         $('#my').text(months[month][0] + "," + year);
 
-        var calendarBody = `<tr>`;
+        var calendarBody = '<tr>';
 
         for (var i in days) {
-            calendarBody += `<td class="day-col"><span class="day">` + days[i] + `</span></td>`;
+            calendarBody += '<td class="day-col"><span class="day">' + days[i] + '</span></td>';
         }
 
-        calendarBody += `</tr>`;
+        calendarBody += '</tr>';
 
         var firstNilDays = new Date(months[month][0] + " 1, " + year).getDay();
         var lastNilDays = (7 - (firstNilDays + months[month][1]) % 7) % 7;
@@ -46,19 +46,19 @@ define(['underscore', 'helper'], function (_, helper) {
         var arr = helper.split(Array(firstNilDays).fill(0).concat(_.range(1, (months[month][1] + 1))).concat(Array(lastNilDays).fill(0)), 7);
 
         for (var i = 0; i < arr.length; i++) {
-            calendarBody += `<tr>`;
+            calendarBody += '<tr>';
 
             for (var j = 0; j < 7; j++) {
                 if (arr[i][j] == 0)
-                    calendarBody += `<td></td>`;
+                    calendarBody += '<td></td>';
                 else
-                    calendarBody += `<td>
-                                    <i id="x` + arr[i][j] + `" class="fa fa-star-o fa-3x"></i>
-                                    <span class="date">` + arr[i][j] + `</span>
-                                 </td>`;
+                    calendarBody += '<td>' +
+                                    '<i id="x' + arr[i][j] + '" class="fa fa-star-o fa-3x"></i>' +
+                                    '<span class="date">' + arr[i][j] + '</span>' +
+                                 '</td>';
             }
 
-            calendarBody += `</tr>`;
+            calendarBody += '</tr>';
         }
 
         $('#calendarBody').find('table').html(calendarBody);
