@@ -8,7 +8,7 @@ A calendar plugin in Javascript.
 
   `$ git clone git@github.com:codingkapoor/wfh-calendar.git`
 
-- Go into cloned directory
+- Go into project directory
 
   `$ cd wfh-calendar`
 
