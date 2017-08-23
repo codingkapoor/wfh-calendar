@@ -16,7 +16,7 @@ A calendar plugin in Javascript.
 
   `$ npm install`
 
-- Launch the application on chrome.
+- Launch the application on chrome at port 3000.
 
   `$ grunt server:dist`
 
