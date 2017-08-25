@@ -1,49 +1,20 @@
-define(['underscore', 'helper'], function (_, helper) {
-
-    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    var months = [];
-
-    function prepareMonthsDictionary(year) {
-        months = {
-            0: ["January", 31],
-            1: [],
-            2: ["March", 31],
-            3: ["April", 30],
-            4: ["May", 31],
-            5: ["June", 30],
-            6: ["July", 31],
-            7: ["August", 31],
-            8: ["September", 30],
-            9: ["October", 31],
-            10: ["November", 30],
-            11: ["December", 31]
-        };
-
-        function isLeapYear(year) {
-            return (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0)
-        }
-
-        if (isLeapYear(year)) {
-            months[1] = ["February", 29]
-        } else
-            months[1] = ["February", 28]
-    }
+define(['underscore', 'helper', 'date'], function (_, helper, date) {
 
     function buildCalendar(month, year) {
-        $('#my').text(months[month][0] + "," + year);
+        $('#my').text(date.months(year)[month][0] + "," + year);
 
         var calendarBody = '<tr>';
 
-        for (var i in days) {
-            calendarBody += '<td class="day-col"><span class="day">' + days[i] + '</span></td>';
+        for (var i in date.days) {
+            calendarBody += '<td class="day-col"><span class="day">' + date.days[i] + '</span></td>';
         }
 
         calendarBody += '</tr>';
 
-        var firstNilDays = new Date(months[month][0] + " 1, " + year).getDay();
-        var lastNilDays = (7 - (firstNilDays + months[month][1]) % 7) % 7;
+        var firstNilDays = new Date(date.months(year)[month][0] + " 1, " + year).getDay();
+        var lastNilDays = (7 - (firstNilDays + date.months(year)[month][1]) % 7) % 7;
 
-        var arr = helper.split(Array(firstNilDays).fill(0).concat(_.range(1, (months[month][1] + 1))).concat(Array(lastNilDays).fill(0)), 7);
+        var arr = helper.split(Array(firstNilDays).fill(0).concat(_.range(1, (date.months(year)[month][1] + 1))).concat(Array(lastNilDays).fill(0)), 7);
 
         for (var i = 0; i < arr.length; i++) {
             calendarBody += '<tr>';
@@ -67,7 +38,6 @@ define(['underscore', 'helper'], function (_, helper) {
     /* Initialize Calendar with current month and year. */
     (function () {
         var currentDate = new Date();
-        prepareMonthsDictionary(currentDate.getFullYear());
         buildCalendar(currentDate.getMonth(), currentDate.getFullYear());
     }());
 
