@@ -1,9 +1,16 @@
 define(['underscore', 'helper', 'date'], function (_, helper, date) {
 
     function buildCalendar(month, year) {
-        $('#my').text(date.months(year)[month][0] + "," + year);
 
-        var calendarBody = '<tr>';
+        var calendarHeader =
+            '<div id="calendarHeader"><ul>' +
+                '<li id="prev">&#10094;</li><li id="next">&#10095;</li>' +
+                '<li><span id="my" style="font-size:24px">' + date.months(year)[month][0] + "," + year + '</span></li>' +
+                '<li><input id="view-toggle" checked data-toggle="toggle" data-on="FULL-DAY VIEW" data-off="HALF-DAY VIEW" type="checkbox" /></li>' +
+            '</ul></div>';
+
+
+        var calendarBody = '<div id="calendarBody"><table border=1><tr>';
 
         for (var i in date.days) {
             calendarBody += '<td class="day-col"><span class="day">' + date.days[i] + '</span></td>';
@@ -23,25 +30,26 @@ define(['underscore', 'helper', 'date'], function (_, helper, date) {
                 if (arr[i][j] == 0)
                     calendarBody += '<td></td>';
                 else
-                    calendarBody += '<td>' +
-                                    '<i id="x' + arr[i][j] + '" class="fa fa-star-o fa-3x"></i>' +
-                                    '<span class="date">' + arr[i][j] + '</span>' +
-                                 '</td>';
+                    calendarBody += '<td><i id="x' + arr[i][j] + '" class="fa fa-star-o fa-3x"></i>' +
+                    '<span class="date">' + arr[i][j] + '</span></td>';
             }
 
             calendarBody += '</tr>';
         }
+        calendarBody += '</table></div>';
 
-        $('#calendarBody').find('table').html(calendarBody);
+        return calendarHeader + calendarBody;
     }
 
     /* Initialize Calendar with current month and year. */
     (function () {
         var currentDate = new Date();
-        buildCalendar(currentDate.getMonth(), currentDate.getFullYear());
+        var calendar = buildCalendar(currentDate.getMonth(), currentDate.getFullYear());
+        $('#calendar').html(calendar);
+        $('#view-toggle').bootstrapToggle();
     }());
 
-    $('#next').click(function () {
+    $(document).on('click', '#next', function () {
         var currentMonthYear = new Date($('#my').text());
         var month = currentMonthYear.getMonth() + 1;
         var year = currentMonthYear.getFullYear();
@@ -53,9 +61,10 @@ define(['underscore', 'helper', 'date'], function (_, helper, date) {
 
         var calendar = buildCalendar(month, year);
         $('#calendar').html(calendar);
+        $('#view-toggle').bootstrapToggle();
     });
 
-    $('#prev').click(function () {
+    $(document).on('click', '#prev', function () {
         var currentMonthYear = new Date($('#my').text());
         var month = currentMonthYear.getMonth() - 1;
         var year = currentMonthYear.getFullYear();
@@ -67,6 +76,7 @@ define(['underscore', 'helper', 'date'], function (_, helper, date) {
 
         var calendar = buildCalendar(month, year);
         $('#calendar').html(calendar);
+        $('#view-toggle').bootstrapToggle();
     });
 
 });
