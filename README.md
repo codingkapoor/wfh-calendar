@@ -4,6 +4,8 @@ A calendar plugin in Javascript.
 
 ![Wfh Calendar](https://github.com/codingkapoor/wfh-calendar/blob/master/wfh-calendar1.gif)
 
+(**Note:** I have used [Peek](https://github.com/phw/peek), an animated gif screen recorder for the gif posted above.)
+
 # Getting started
 
 - Clone this repository
