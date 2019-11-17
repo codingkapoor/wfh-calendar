@@ -2,6 +2,8 @@
 
 A calendar plugin in Javascript.
 
+![Wfh Calendar](https://github.com/codingkapoor/wfh-calendar/blob/master/wfh-calendar1.gif)
+
 # Getting started
 
 - Clone this repository
