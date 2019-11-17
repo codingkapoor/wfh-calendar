@@ -14,7 +14,11 @@ A calendar plugin in Javascript.
 
 - Install required node dependencies
 
-  `$ npm install`
+  ``` 
+  $ npm install gem
+  $ gem install sass
+  $ npm install
+  ```
 
 - Launch the application in chrome on port 3000.
 
